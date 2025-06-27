@@ -4,11 +4,34 @@
 	<meta charset='utf-8'>
 	<title>My first web application</title>
 	<script>
+		function validate(frm)
+		{
+			var nn=frm.nm.value.trim();
+			if(nn.length==0)
+			{
+				alert('Name required');
+				frm.nm.focus();
+				return false;
+			}
+			var v='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .';
+			var e;
+			e=0;
+			while(e<nn.length)
+			{
+				if(v.indexOf(nn.charAt(e))==-1)
+				{
+					alert("Invalid characters in name, only alphabets, space and . are allowed.");
+					frm.nm.focus();
+					return false;
+				}
+			}
+			return true;
+		}
 	</script>
 </head>
 <body>
 	<h1>Personal Information</h1>
-	<form action='/My-First-Application/one/saveData'>
+	<form action='/My-First-Application/one/saveData' onsubmit='return validate(this)'>
 		Name
 		<input type='text' id='nm' name='nm'><br>
 
